@@ -1,0 +1,11 @@
+- api-name: kubernetes-api
+  command-reference: 
+  selected-commands:
+  - command-name:
+    command-desc:
+    comments:
+    - 
+  - command-name:
+    command-desc:
+    comments:
+    -             

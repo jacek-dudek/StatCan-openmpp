@@ -1,0 +1,47 @@
+Change this into a nested structure of commands > sub-commands > sub-sub-commands and options at any level.
+
+- command-name: OpenM++ model executables
+  command-reference: The openmpp wiki page.
+  options:
+  - 
+  sub-commands:
+  - 
+- command-name: azure-cli
+  command-reference: 
+  sub-commands:
+  - command-name:
+    command-desc:
+    comments:
+    - 
+  - command-name:
+    command-desc:
+    comments:
+    -
+- command-name: terraform
+  command-reference:
+  sub-commands:
+  - command-name:
+    command-desc:
+    comments:
+    -
+- command-name: docker
+  command-reference:
+  sub-commands:
+  - command-name:
+    command-desc:
+    comments:
+    -
+- command-name: kubectl
+  command-reference:
+  sub-commands:
+  - command-name:
+    command-desc:
+    comments:
+    - 
+- command-name: ssh
+  command-reference:
+  sub-commands:
+  - command-name:
+    command-desc:
+    comments:
+    -

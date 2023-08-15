@@ -1,0 +1,10 @@
+title: Main
+sections: 
+- section-name: Synopsis
+  section-content: Implement a web service that allows Statistics Canada microsimulation researchers to upload, browse, edit, and run microsimulation models and view or download results on the StatCan cloud. 
+- section-name: Components
+  section-content:
+  - component-name: OpenM++
+    resource-locator:
+    description: Open source microsimulation framework compatible with ModGen. We will be deploying it on the StatCan cloud and using it as the part of the backend to the service, to compile, run, and manage results of microsimulation models developed for ModGen.
+  - component-name: 
