@@ -1,0 +1,110 @@
+Subject: OpenM Inc, StatCan and developing internal support team - Follow up
+
+Hi all,
+
+This email follows up on suggested concrete actions I mentioned at our meeting last Wednesday 2023-07-19.
+
+I mentioned mechanical prerequisite StatCan tasks which StatCan can advance now, with no knowledge required of the substance or architecture of ompp, or underlying tech.
+•	These tasks are required for StatCan to make internal contributions to the OpenM++ project (ompp).
+•	Mostly, they involve spec’ing and provisioning development system(s) for each target OS, obtaining and installing required development software, building ompp and all its components and utilities on each target OS, and building and testing the models in the ompp test suite.
+•	These tasks are largely mechanical and are described in our wiki, sometimes with exact command lines or screenshots.
+
+Using that information, StatCan should be able to accomplish these prerequisites autonomously.
+•	Of course, feel free to reach out if you encounter issues, or notice errors or omissions in our wiki instructions.
+•	Our ability to help with issues peculiar to the StatCan environment, e.g. permissions for files, devices, OS, and software, is obviously limited.
+
+This email also describes the first substantive task I suggested at the meeting. It then lists some learning resources. It concludes with a thought about hands-on learning for a prospective ompp developer.
+
+Regards to all,
+Steve
+
+
+PREREQUISITE TASKS:
+
+Here’s more detail on the prerequisite tasks for ompp development.
+This list is organized so you can use it as a checklist to evaluate progress to goal if desired.
+
+1.	Complete and email us the “OpenM++ contributor agreement” for each StatCan developer who will be working on the project.
+•	This is not required for any prerequisite task but will be required to push any software modifications to the ompp git repositories.
+
+2.	Spec and provision one or more StatCan “ompp dev systems” (ODSs) in one or more StatCan security environments.
+•	To build, develop, debug, and test all ompp components.
+•	An ODS is needed to support both Windows and Linux development, either using VMs or separate systems.
+•	Ompp needs to be built and tested in MacOS, so a MacOS ODS is required for that.
+•	An ODS need to access the various security environments of all existing StatCan models (DemoSim, OncoSim, Pohem, CRISM) to reproduce and troubleshoot issues encountered by StatCan model developers using their models (both release and development versions) in their various security environments.
+•	A StatCan model might exist (and require support) in more than one security environment, e.g. CRISM may have a public version and a confidential version.
+
+3.	Create StatCan “ompp git repos” (OGRs)
+•	Each OGR must be an exact clone of the corresponding ompp git repository on GitHub.
+•	Each OGR needs to be sync’d from time to time with the corresponding ompp git repo (on GitHub). That can be done by copying it as a zip archive to a lower security environment and syncing from there.
+•	Ompp has multiple git repositories, organized on tech lines (see ompp wiki), and the ompp wiki has its own distinct repo of markdown files and images.
+•	Each ODS needs to have access to an OGR from its security environment (by repo duplication if necessary).
+
+4.	Install required development software on all ODSs
+•	Install all software and tools required to build all ompp components, including stand-alone utilities, on each ODS, in particular on Windows and on Linux.
+•	The ompp wiki contains instructions about the software needed and where to obtain it.
+•	Required software includes C++, Bison, Flex, Go, Perl, Python, R, Node.js, MPI.
+•	Some of this software requires additional configuration after installation to obtain and install secondary components, e.g. Go, Perl, Python, R, Node.js.
+
+5.	Build and test all ompp components on each ODS.
+•	instructions in our wiki.
+•	Ompp components include: ompp runtime libraries, ompp compiler, Perl standalone tools (e.g. test_models), Go standalone tools and components (dbcopy, oms), the browser-based user interface, the R and Python examples and packages.
+•	Build/run/test all models in the ompp model suite (in the git repo) using test_models.
+•	Build/launch/test the browser-based UI using one or more test models.
+•	Reproduce the R and Python examples in the ompp wiki.
+•	In Windows, use VS to build and trace a Debug version of a model.
+•	In Linux, use Visual Studio Code to build and trace a Debug version of a model.
+
+6.	Install and test Modgen (Windows ODS only)
+•	after Modgen installation, build/run/test all models in the ompp model suite.
+•	Build a model in Modgen in debug mode, and use VS to trace execution using breakpoints.
+
+7.	Create copies of major StatCan models for testing.
+•	Copy (git clone) each major StatCan model in the ODS.
+•	Build/run/test each StatCan model using test_models.
+•	Perform a run of OncoSim at scale using multi-threading and a large population (32M).
+
+Ok, that’s it for the mechanical steps to create an environment for ompp development.
+
+
+SUBSTANTIVE TASK #1:
+I suggested this task because it requires little understanding of ompp and should be doable by following the recipe on our wiki.
+It is a previously identified outstanding task which will enable StatCan model devs and users to do large numbers of runs remotely inside the StatCan perimeter, and at reasonable cost.
+
+1.	Create an on-demand ompp cloud cluster (OCC) for running StatCan models by setting up a front-end server and some (e.g. 16) “Cloud Main” on-demand back-end servers (16-core, 64 GB each).
+•	Instructions are on our wiki but may need tweaking for the StatCan cloud environment.
+•	We have tested OCCs in Google Cloud and in Microsoft Azure, and examples are on our wiki.
+•	A working example, if required, is the CPAC instance in Google Cloud, which supports StatCan’s OncoSim and associated models, and a community of OncoSim users.
+
+2.	Install and test selected StatCan models on the StatCan OCC.
+•	candidate models are OncoSim, POHEM, CRISM, and DemoSim.
+
+
+LEARNING MATERIALS:
+Here are some notes on learning materials for prospective StatCan ompp developers.
+
+1.	There exist good, easily identified (use Google) web-based resources for learning C++, C++ STL collections, go, etc.
+2.	The manuals for Flex and Bison contain useful introductions to those compiler-compiler tools. That said, compiler-compiler tech and dev is usually considered an advanced subject. There are courses on the subject.
+3.	Documentation on Modgen was mentioned at the meeting. Most of that is on the StatCan external (or internal mirror) web site (search for Microsimulation). Don’t miss a self-extracting zip package which contains a set of animated PowerPoint presentations which were used to give a course on Modgen for model devs (the decks were designed with animated callouts for self-learning). The “Modgen Developer’s Guide” is a prime reference on the language used to specify models in Modgen and in ompp.
+4.	Navigate to and read all topics in the ompp wiki.
+5.	Probe a model using event trace to understand what it’s doing.
+
+ON-HANDS LEARNING:
+It might be helpful for a prospective programmer on the ompp project to spend some time working directly on a StatCan model and directly with members of a StatCan model team, as a (temporary) team member doing model development.
+That would help the programmer to understand the language, the environment, and how both are used at StatCan.
+And of course, that would help develop a working relationship with StatCan model developers.
+Ompp is an advanced technology, which includes a language and environment, formally a bit like R or Python.
+Both R and Python, as it turns out, are written in the C language, and R/Python packages are often written in C++.
+So, a programmer working on the R or Python projects needs to know C and C++.
+But that programmer should also be familiar with R/Python itself, and how it is used.
+An effective way for a programmer to become familiar with R/Python is to use it solve problems, like an analyst would.
+The same is true for ompp.
+
+
+CPAC OMPP INSTALLATION ON GOOGLE CLOUD:
+You might also find it informative/helpful to obtain an account on CPAC’s public ompp instance on Google Cloud, which hosts the StatCan OncoSim models.
+That instance has a back-end MPI computational cluster (21 on-demand servers), unlike the other ompp installs we are aware of at StatCan.
+CPAC is the owner/gatekeeper for that instance.  If interested, please reach out to HAD and they’ll put you in touch.
+
+Sample URL: https://cpac-roxanne.openmpp.org
+
