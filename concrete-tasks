@@ -1,0 +1,13 @@
+Some comments to start off the discussion on the initial service model for OpenM++ on the dev cluster.
+
+I thought we could use as a reference point the service run by the OpenM team on Google Cloud. This was the service shown at the presentation by Roxanne on July 26th. This is also the direction of development that Steve Gribble suggested. 
+
+So basically it's a multi-user web service run on Google Cloud. There are user-specific URLs that lead to a login page. After login the user is served the OpenM++ UI and can browse a selection of models. The ones that are currently available on that service are OncoSim models. The user can download results from previous model runs. The user can create new scenarios for existing models or modify existing scenarios. There is no functionality to upload and compile new models. I believe each user gets a persistent storage volume so they can save their scenarios and model runs and reference them on subsequent logins.
+
+So that's the functionality from the user's perspective. The other aspect that's been noted by Steve is that their cluster uses the MPI parallelized version of model execution. I've been digging into the OpenM++ docs and elsewhere regarding that, as I mentioned before.
+
+I think we could aim for feature parity with this service as the goal for the MVP.
+
+In terms of concrete tasks to be done, I wonder if Souheil, having read the above description, could suggest an implementation strategy in terms of what Kubernetes objects to use and how to arrange them.
+
+Then I could create some learning and implementation tasks: reading docs about specific Kubernetes objects or parts of the API, writing out specific manifest files, Dockerfiles, helm charts, etc.
