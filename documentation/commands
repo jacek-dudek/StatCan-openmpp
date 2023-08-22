@@ -1,4 +1,8 @@
-Change this into a nested structure of commands > sub-commands > sub-sub-commands and options at any level.
+This is intended to be a reference of often used commands and command line options and gotchas for all the various commands and clients involved in OpenM++ development and deployment.
+
+Haven't decided whether to use yaml and a parser or just write out in html directly.
+
+Change this into a nested structure of commands > sub-commands > sub-sub-commands and options at various levels.
 
 - command-name: OpenM++ model executables
   command-reference: The openmpp wiki page.

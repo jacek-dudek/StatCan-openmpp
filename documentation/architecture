@@ -1,0 +1,28 @@
+Overview of service architecture in terms of Kubernetes objects:
+
+Basic service offering:
+    LoadBalancer
+    Service
+    Deployment
+
+Limitations of basic service:
+    Doesn't distinguish between different users, so essentially not a multi-user setup.
+    There is no authentication process for access to service.
+    Activities of one user will overlap with activities of another user.
+    No persistent storage implemented, so no results will persist when service is restarted.
+
+Stateful set based offering:
+    Ingress
+    Service (headless)
+    StatefulSet
+    PersistentVolume
+
+MPI parallel computation backend:
+    Service
+    Pod (manual specification)
+    StatefulSet
+    Secret
+    ConfigMap
+    NetworkPolicy
+    PodDisruptionBudget
+

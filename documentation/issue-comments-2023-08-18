@@ -1,0 +1,23 @@
+Clarifying project direction and deliverables:
+  We decided to work towards implementing a cloud offering that has feature parity with the existing microsimulation web service operated by the OpenM++ team on GCP.
+
+Progress made:
+  Did some more background reading of Kubernetes documentation.
+  Identified Kubernetes objects that will be needed in subsequent iterations of the service.
+  Located a github project that appears to be an implementation of OpenMPI on Kubernetes.
+
+Tasks going forward:
+  For deploying the basic service:
+    Assign a domain name.
+    Upload container image to the standard location for AAW. (optional)
+    Replace the LoadBalancer object with appropriate routing rules in the existing AAW Ingress object. (optional)
+    Incorporate into the CI/CD setup used by AAW. (optional)
+
+  For service implemented using a StatefulSet workload:
+    Package deployment into a Helm chart.
+    Research how to specify PersistentVolumes and how to map to appropriate instances of the web service.
+    Research how to authenticate different users and how to route their session to appropriate instances of the web service.
+
+  For the OpenMPI backend service:
+    Work through the github project and try to get any MPI job running on a Kubernetes cluster.
+    Study the implementation to determine how to deploy it as a backend service that can be used by the OpenM++ web service instances.
