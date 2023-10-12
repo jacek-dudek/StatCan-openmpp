@@ -1,0 +1,56 @@
+apiVersion: kubeflow.org/v1
+kind: MPIJob
+metadata:
+  name: ompp-mpijob-newtimebased # set name
+  namespace: aaw-team            # set namespace
+spec:
+  runPolicy:
+    cleanPodPolicy: Running # terminate workers after completion
+  mpiReplicaSpecs:
+    Launcher:
+      replicas: 1
+      template:
+        metadata:
+          labels:
+            data.statcan.gc.ca/inject-blob-volumes: 'true' # access to blob storage
+            sidecar.istio.io/inject: "false" # init container conflict with istio
+        spec:
+          containers:
+          - image: k8scc01covidacr.azurecr.io/ompp-run-ubuntu:d1174244baa102b26f0850c3883e7b15c50a3b64
+            name: ompp-mpijob-launcher
+            command:
+            - mpirun
+            - -n 
+            - "2" # set number of parallel instances (workers)
+            - -wdir
+            - /home/jovyan/buckets/aaw-unclassified/oncosim/models/ # set working directory
+            - ./NewTimeBased # set model to run
+            - -OpenM.SubValues 
+            - "4" 
+            - -OpenM.Threads
+            - "2" 
+            resources:
+              limits:
+                cpu: '2'
+                memory: 2Gi
+              requests:
+                cpu: 250m
+                memory: 250Mi
+    Worker:
+      replicas: 2 # set number of wokers
+      template:
+        metadata:
+          labels:
+            data.statcan.gc.ca/inject-blob-volumes: 'true'
+            sidecar.istio.io/inject: "false"
+        spec:
+          containers:
+          - image: k8scc01covidacr.azurecr.io/ompp-run-ubuntu:d1174244baa102b26f0850c3883e7b15c50a3b64
+            name: ompp-mpijob-worker
+            resources:
+              limits:
+                cpu: '2'
+                memory: 2Gi
+              requests:
+                cpu: '2'
+                memory: 1Gi
